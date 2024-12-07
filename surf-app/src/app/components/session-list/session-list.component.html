@@ -1,0 +1,48 @@
+<div class="session-list">
+    <ng-container *ngIf="!serverDetails">
+        <div (click)="getServerDetails(serverId)" *ngFor="let serverId of commonDataService['servers']"
+             class="session">
+            <img alt="" class="avatar" height="48" ngSrc="assets/images/avatar/default-avatar.png" width="48">
+            <span>{{ commonDataService.getServerInfoById(serverId)['name'] }}</span>
+        </div>
+        <div (click)="getServerDetails(serverId)" *ngFor="let serverId of commonDataService['servers']"
+             class="session">
+            <img alt="" class="avatar" height="48" ngSrc="assets/images/avatar/default-avatar.png" width="48">
+            <span>{{ commonDataService.getServerInfoById(serverId)['name'] }}</span>
+        </div>
+        <div (click)="getServerDetails(serverId)" *ngFor="let serverId of commonDataService['servers']"
+             class="session">
+            <img alt="" class="avatar" height="48" ngSrc="assets/images/avatar/default-avatar.png" width="48">
+            <span>{{ commonDataService.getServerInfoById(serverId)['name'] }}</span>
+        </div>
+        <div (click)="getServerDetails(serverId)" *ngFor="let serverId of commonDataService['servers']"
+             class="session">
+            <img alt="" class="avatar" height="48" ngSrc="assets/images/avatar/default-avatar.png" width="48">
+            <span>{{ commonDataService.getServerInfoById(serverId)['name'] }}</span>
+        </div>
+        <div (click)="getServerDetails(serverId)" *ngFor="let serverId of commonDataService['servers']"
+             class="session">
+            <img alt="" class="avatar" height="48" ngSrc="assets/images/avatar/default-avatar.png" width="48">
+            <span>{{ commonDataService.getServerInfoById(serverId)['name'] }}</span>
+        </div>
+    </ng-container>
+    <div *ngIf="serverDetails">
+        <div class="channel-title">
+            <img (click)="backToSessionList()" alt="back" height="24" ngSrc="assets/images/icon/arrow_back.svg"
+                 width="24">
+            <span class="server-name">{{ serverDetails['name'] }}</span>
+        </div>
+        <div class="channel-list">
+            <div *ngFor="let group of serverDetails['channel_groups']" class="channel-group">
+                <h3 class="channel-group-title">{{ group['name'] }}</h3>
+                <ul class="channel-group-list">
+                    <li (click)="toChat(channel['id'],channel['type'])"
+                        *ngFor="let channel of group['channels']"
+                        class="channel">
+                        {{ channel['name'] }} - {{ channel['type'] }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

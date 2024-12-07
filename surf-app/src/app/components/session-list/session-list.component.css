@@ -1,0 +1,66 @@
+
+.channel-title {
+    padding: 5px;
+    background: #408040;
+    display: flex;
+    align-items: center; /* 垂直居中 */
+}
+
+.server-name {
+    margin-left: 1rem;
+    font-size: 18px;
+}
+
+.channel-list {
+    padding: 1rem;
+}
+
+.channel-group {
+    padding: 0;
+}
+
+.channel-group-title {
+    font-size: 0.8rem;
+    color: #b2b2b2;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.channel-group-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.channel {
+    background-color: #FF6D00;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.session-list {
+    height: 100%;
+    background-color: #0077b6;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.session {
+    padding: 0.5rem;
+    display: flex;
+}
+
+.session span {
+    margin-left: 10px;
+}
+
+.session:hover {
+    background-color: #dcdcdc; /* 悬停时变深的背景颜色 */
+}

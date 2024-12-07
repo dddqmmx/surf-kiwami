@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="sidebar">
+        <div class="user-options">
+            <img (click)="toUserInfo()" alt="" class="avatar" height="48"
+                 ngSrc="assets/images/avatar/default-avatar.png" width="48">
+            <img (click)="toChat()" alt="" class="icon" height="38" ngSrc="assets/images/icon/chat_bubble.svg"
+                 width="38">
+            <img alt="" class="icon" height="38" ngSrc="assets/images/icon/groups.svg" width="38">
+            <img alt="" class="icon" height="38" ngSrc="assets/images/icon/campaign.svg" width="38">
+            <img alt="" class="icon" height="38" ngSrc="assets/images/icon/person.svg" width="38">
+            <img alt="" class="icon" height="38" ngSrc="assets/images/icon/call.svg" width="38">
+            <img (click)="toSettings()" alt="" class="icon" height="38" ngSrc="assets/images/icon/settings.svg"
+                 width="38">
+        </div>
+    </div>
+    <div class="content">
+        <router-outlet></router-outlet>
+    </div>
+</div>

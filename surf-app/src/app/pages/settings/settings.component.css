@@ -1,0 +1,22 @@
+:host {
+    display: flex; /* 或 flex */
+    width: 100%;
+    height: 100%;
+}
+
+.container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.sidebar {
+    padding: 1rem;
+    background: #408040;
+}
+
+.content {
+    background: orchid;
+    width: 100%;
+}
