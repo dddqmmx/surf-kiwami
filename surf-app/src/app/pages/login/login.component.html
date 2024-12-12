@@ -6,6 +6,6 @@
             <option *ngFor="let user of users" [value]="user.file">{{ user.name }}</option>
         </select>
         <button class="login-button" (click)="login()">登录</button>
-        <a class="to_user_manager">管理用户</a>
+        <a class="to_user_manager" (click)="toManageUsers()">管理用户</a>
     </div>
 </div>

@@ -2,6 +2,10 @@
     <div class="sidebar">
         <div>
             <img alt="" src="assets/images/icon/gpp_maybe.svg">
+            <span>常规设置</span>
+        </div>
+        <div>
+            <img alt="" src="assets/images/icon/gpp_maybe.svg">
             <span>通知管理</span>
         </div>
         <div>
@@ -14,14 +18,6 @@
         </div>
     </div>
     <div class="content">
-        <div>
-            <span>安全等级</span>
-            <select>
-                <option>无</option>
-                <option>普通</option>
-                <option>高</option>
-                <option>极端</option>
-            </select>
-        </div>
+        <router-outlet></router-outlet>
     </div>
 </div>
