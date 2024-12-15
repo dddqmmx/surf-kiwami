@@ -115,4 +115,8 @@ export class LoginComponent implements OnInit, OnDestroy {
             console.error("Error during initialization:", error);
         }
     }
+
+    toManageUsers() {
+        this.router.navigate(['/manage-users']).then();
+    }
 }

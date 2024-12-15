@@ -48,7 +48,7 @@ export class MainComponent implements OnInit, OnDestroy {
     }
 
     toUserInfo() {
-        this.router.navigate(['/main/user_info']).then();
+        this.router.navigate(['/main/user-info']).then();
     }
 
     toSettings() {
