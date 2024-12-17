@@ -1,7 +1,7 @@
 <div class="container">
     <div class="login-tabs">
         <span class="login-title">登录</span>
-        <img class="user-avatar" alt="" src="assets/images/avatar/default-avatar.png">
+        <img class="user-avatar" alt="" src="/images/avatar/default-avatar.png">
         <select class="select-username" [(ngModel)]="selectedUserPath">
             <option *ngFor="let user of users" [value]="user.file">{{ user.name }}</option>
         </select>

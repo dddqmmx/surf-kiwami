@@ -2,13 +2,13 @@
     <ng-container *ngIf="!serverInfo">
         <div (click)="getServerChannels(serverId)" *ngFor="let serverId of commonDataService['servers']"
              class="session">
-            <img alt="" class="avatar" height="48" ngSrc="assets/images/avatar/default-avatar.png" width="48">
+            <img alt="" class="avatar" height="48" ngSrc="../../../../public/images/avatar/default-avatar.png" width="48">
             <span>{{ commonDataService.getServerInfoById(serverId)['name'] }}</span>
         </div>
     </ng-container>
     <div *ngIf="serverInfo">
         <div class="channel-title">
-            <img (click)="backToSessionList()" alt="back" height="24" ngSrc="assets/images/icon/arrow_back.svg"
+            <img (click)="backToSessionList()" alt="back" height="24" ngSrc="../../../../public/images/icon/arrow_back.svg"
                  width="24">
             <span class="server-name">{{ serverInfo['name'] }}</span>
         </div>
