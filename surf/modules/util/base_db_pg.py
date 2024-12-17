@@ -1,6 +1,6 @@
 import re
 from typing import Union, List, Dict
-
+from ConfigManager import TomlConfigManager
 from psycopg2.pool import SimpleConnectionPool
 
 
@@ -10,7 +10,7 @@ class BaseDBPG(object):
         self.trans_conn = None
         self.trans_error_cb = None
         self.trans_cur = None
-
+        self.config = TomlConfigManager()
         self.timing_start = None
         self.timing_end = None
 
@@ -20,13 +20,13 @@ class BaseDBPG(object):
     def _setConnPool(self):
         if not hasattr(self, "conn_pool") or not self.conn_pool:
             self.conn_pool = SimpleConnectionPool(
-                minconn="1",
-                maxconn="50",
-                host='www.dddqmmx.asia',
-                port='5432',
-                database="surf",
-                user='postgres',
-                password='114514'
+                minconn=self.config.get("postgres", "minconn"),
+                maxconn=self.config.get("postgres", "maxconn"),
+                host=self.config.get("postgres", "host"),
+                port=self.config.get("postgres", "port"),
+                database=self.config.get("postgres", "database"),
+                user=self.config.get("postgres", "user"),
+                password=self.config.get("postgres", "password"),
             )
 
     def _get_Schema(self):
