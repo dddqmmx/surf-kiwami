@@ -101,11 +101,11 @@ celerybeat.pid
 # Environments
 .env
 .venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
+/env/
+/venv/
+/ENV/
+/env.bak/
+/venv.bak/
 
 # Spyder project settings
 .spyderproject
@@ -118,32 +118,32 @@ venv.bak/
 /site
 
 # mypy
-.mypy_cache/
+/.mypy_cache/
 .dmypy.json
 dmypy.json
 
 # Pyre type checker
-.pyre/
+/.pyre/
 
 # pytype static type analyzer
-.pytype/
+/.pytype/
 
 # Cython debug symbols
-cython_debug/
+/cython_debug/
 
 # Django media and static folders
-media/
-static/
+/media/
+/static/
 
 # VS Code settings
-.vscode/
+/.vscode/
 
 # PyCharm settings (keep your .idea/workspace.xml if you wish)
-.idea/
+/.idea/
 
 # Other common directories to ignore
-tmp/
-temp/
-log/
-logs/
-surf-backend-for-testing/Cargo.lock
+/tmp/
+/temp/
+/log/
+/logs/
+/surf-backend-for-testing/Cargo.lock=
