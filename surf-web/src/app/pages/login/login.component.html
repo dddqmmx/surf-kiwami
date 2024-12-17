@@ -1,0 +1,42 @@
+<!-- HTML 结构 -->
+<div class="container">
+    <div class="info-panel">
+        <div class="info-content">
+            <h2>服务器信息</h2>
+            <div class="server-info">
+                <p>服务器状态：正常运行</p>
+                <p>当前连接数：156</p>
+                <p>系统负载：低</p>
+            </div>
+
+            <h2>最新公告</h2>
+            <div class="announcement-list">
+                <div class="announcement-item">
+                    <h3>系统更新通知</h3>
+                    <p>版本 114514 已发布，修复了若干已知问题</p>
+                    <span class="date">2024-12-12</span>
+                </div>
+                <div class="announcement-item">
+                    <h3>安全提醒</h3>
+                    <p>请及时更新密码，保护账号安全</p>
+                    <span class="date">2024-12-12</span>
+                </div>
+                <div class="announcement-item">
+                    <h3>安全提醒</h3>
+                    <p>请及时更新密码，保护账号安全</p>
+                    <span class="date">2024-12-12</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="login-tabs">
+        <span class="login-title">登录</span>
+        <img class="user-avatar" alt="" src="/images/avatar/default-avatar.png">
+        <select class="select-username" [(ngModel)]="selectedUserPath">
+            <option *ngFor="let user of users" [value]="user.file">{{ user.name }}</option>
+        </select>
+        <button class="login-button" (click)="login()">登录</button>
+        <a class="to_user_manager" (click)="toManageUsers()">管理用户</a>
+    </div>
+</div>
