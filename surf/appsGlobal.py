@@ -28,6 +28,7 @@ def getAppName():
 APPNAME = getAppName()
 PLATFROMPATH = getPlatformPath()
 APPHOME = os.path.join(PLATFROMPATH, APPNAME)
+CONFIGHOME = os.path.join(APPHOME, "config")
 
 
 def get_logger(logfile=APPNAME):
