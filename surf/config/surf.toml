@@ -7,3 +7,6 @@ port = "5432"
 database = "surf"
 user = "postgres"
 password = "114514"
+[email_check]
+email_host_user = ""
+email_host_password = ""
