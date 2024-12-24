@@ -1,6 +1,6 @@
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp"; -- 确保扩展已安装
 
-CREATE OR REPLACE FUNCTION generate_random_nickname() RETURNS VARCHAR(20) AS
+CREATE OR REPLACE FUNCTION generate_random_nickname() RETURNS VARCHAR(32) AS
 $$
 BEGIN
     RETURN md5(random()::text);
@@ -25,7 +25,9 @@ DROP TABLE IF EXISTS t_users;
 
 CREATE TABLE t_users
 (
-    c_user_id    VARCHAR(36) PRIMARY KEY DEFAULT uuid_generate_v4(),
+    c_user_id    uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
+    c_account_id VARCHAR(32) NOT NULL,
+    c_password TEXT NOT NULL,
     c_nickname   VARCHAR NOT NULL        DEFAULT generate_random_nickname(),
     c_public_key VARCHAR,
     c_user_info  jsonb                   DEFAULT '{}'
@@ -33,8 +35,8 @@ CREATE TABLE t_users
 
 CREATE TABLE t_user_friends
 (
-    c_user_id     VARCHAR(36) NOT NULL,
-    c_friend_id   VARCHAR(36) NOT NULL,
+    c_user_id     uuid NOT NULL,
+    c_friend_id   uuid NOT NULL,
     c_status      VARCHAR(10) CHECK (c_status IN ('pending', 'accepted', 'blocked')),
     c_create_time BIGINT      NOT NULL DEFAULT EXTRACT(EPOCH FROM NOW())::BIGINT,
     PRIMARY KEY (c_user_id, c_friend_id),
@@ -44,10 +46,10 @@ CREATE TABLE t_user_friends
 
 CREATE TABLE t_servers
 (
-    c_server_id   VARCHAR(36) PRIMARY KEY DEFAULT uuid_generate_v4(),
+    c_server_id   uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
     c_description TEXT,
     c_name        VARCHAR     NOT NULL    DEFAULT generate_random_nickname(),
-    c_owner_id    VARCHAR(36) NOT NULL,
+    c_owner_id    uuid NOT NULL,
     c_create_time BIGINT      NOT NULL    DEFAULT EXTRACT(EPOCH FROM NOW())::BIGINT,
     c_icon_url    VARCHAR,
     c_is_active   BOOLEAN     NOT NULL    DEFAULT TRUE,
@@ -56,8 +58,8 @@ CREATE TABLE t_servers
 
 CREATE TABLE t_channel_groups
 (
-    c_group_id   VARCHAR(36) PRIMARY KEY DEFAULT uuid_generate_v4(),
-    c_server_id  VARCHAR(36) NOT NULL,
+    c_group_id   uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
+    c_server_id  uuid NOT NULL,
     c_group_name VARCHAR     NOT NULL,
     c_settings   jsonb       NOT NULL    default '{}',
     FOREIGN KEY (c_server_id) REFERENCES t_servers (c_server_id) ON DELETE CASCADE
@@ -65,12 +67,12 @@ CREATE TABLE t_channel_groups
 
 CREATE TABLE t_channels
 (
-    c_channel_id  VARCHAR(36) PRIMARY KEY                                  DEFAULT uuid_generate_v4(),
-    c_group_id    VARCHAR(36)                                     NOT NULL,
+    c_channel_id  uuid PRIMARY KEY                                  DEFAULT uuid_generate_v4(),
+    c_group_id    uuid                                     NOT NULL,
     c_name        VARCHAR                                         NOT NULL,
     c_type        VARCHAR(10) CHECK (c_type IN ('text', 'voice')) NOT NULL,
     c_description TEXT,
-    c_create_by   VARCHAR(36)                                     NOT NULL,
+    c_create_by   uuid                                     NOT NULL,
     c_create_time BIGINT                                          NOT NULL DEFAULT EXTRACT(EPOCH FROM NOW())::BIGINT,
     c_max_members INTEGER                                         NOT NULL DEFAULT 0,
     c_settings    jsonb                                           NOT NULL default '{}',
@@ -79,8 +81,8 @@ CREATE TABLE t_channels
 
 CREATE TABLE t_roles
 (
-    c_role_id     VARCHAR(36) PRIMARY KEY DEFAULT uuid_generate_v4(),
-    c_server_id   VARCHAR(36) NOT NULL,
+    c_role_id     uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
+    c_server_id   uuid NOT NULL,
     c_name        VARCHAR     NOT NULL,
     c_permissions jsonb       NOT NULL    default '[
       2,
@@ -94,9 +96,9 @@ CREATE TABLE t_roles
 
 CREATE TABLE t_server_members
 (
-    c_id        VARCHAR(36) PRIMARY KEY DEFAULT uuid_generate_v4(),
-    c_server_id VARCHAR(36) NOT NULL,
-    c_user_id   VARCHAR(36) NOT NULL,
+    c_id        uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
+    c_server_id uuid NOT NULL,
+    c_user_id   uuid NOT NULL,
     FOREIGN KEY (c_server_id) REFERENCES t_servers (c_server_id) ON DELETE CASCADE,
     FOREIGN KEY (c_user_id) REFERENCES t_users (c_user_id) ON DELETE CASCADE
 );
@@ -110,8 +112,8 @@ CREATE TABLE t_permissions
 
 CREATE TABLE t_audit_logs
 (
-    c_log_id      VARCHAR(36) PRIMARY KEY DEFAULT uuid_generate_v4(),
-    c_user_id     VARCHAR(36) NOT NULL,
+    c_log_id      uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
+    c_user_id     uuid NOT NULL,
     c_action      TEXT        NOT NULL,
     c_description TEXT,
     c_timestamp   BIGINT      NOT NULL    DEFAULT EXTRACT(EPOCH FROM NOW())::BIGINT,
@@ -120,8 +122,8 @@ CREATE TABLE t_audit_logs
 
 CREATE TABLE t_channel_members
 (
-    c_channel_id  VARCHAR(36) NOT NULL,
-    c_user_id     VARCHAR(36) NOT NULL,
+    c_channel_id  uuid NOT NULL,
+    c_user_id     uuid NOT NULL,
     c_permissions INTEGER     NOT NULL,
     PRIMARY KEY (c_channel_id, c_user_id),
     FOREIGN KEY (c_channel_id) REFERENCES t_channels (c_channel_id) ON DELETE CASCADE,
@@ -130,9 +132,9 @@ CREATE TABLE t_channel_members
 
 CREATE TABLE t_channel_chats
 (
-    c_chat_id            VARCHAR(36) PRIMARY KEY DEFAULT uuid_generate_v4(),
-    c_referenced_chat_id VARCHAR(36) NULL        DEFAULT NULL,
-    c_channel_id         VARCHAR(36) NOT NULL,
+    c_chat_id            uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
+    c_referenced_chat_id uuid NULL        DEFAULT NULL,
+    c_channel_id         uuid NOT NULL,
     c_status             INTEGER     NOT NULL    DEFAULT 0,
     FOREIGN KEY (c_channel_id) REFERENCES t_channels (c_channel_id) ON DELETE CASCADE,
     FOREIGN KEY (c_referenced_chat_id) REFERENCES t_channel_chats (c_chat_id) ON DELETE CASCADE
@@ -141,9 +143,9 @@ CREATE TABLE t_channel_chats
 
 CREATE TABLE t_user_roles
 (
-    c_user_id   VARCHAR(36),
-    c_role_id   VARCHAR(36),
-    c_server_id VARCHAR(36),
+    c_user_id   uuid,
+    c_role_id   uuid,
+    c_server_id uuid,
     FOREIGN KEY (c_user_id) REFERENCES t_users (c_user_id) ON DELETE CASCADE,
     FOREIGN KEY (c_role_id) REFERENCES t_roles (c_role_id) ON DELETE CASCADE,
     FOREIGN KEY (c_server_id) REFERENCES t_servers (c_server_id) ON DELETE CASCADE
@@ -151,9 +153,9 @@ CREATE TABLE t_user_roles
 
 CREATE TABLE t_message_reactions
 (
-    c_reaction_id   VARCHAR(36) PRIMARY KEY DEFAULT uuid_generate_v4(),
-    c_chat_id       VARCHAR(36) NOT NULL,
-    c_user_id       VARCHAR(36) NOT NULL,
+    c_reaction_id   uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
+    c_chat_id       uuid NOT NULL,
+    c_user_id       uuid NOT NULL,
     c_reaction      VARCHAR(10) NOT NULL,
     c_reaction_time BIGINT      NOT NULL    DEFAULT EXTRACT(EPOCH FROM NOW())::BIGINT,
     FOREIGN KEY (c_chat_id) REFERENCES t_channel_chats (c_chat_id) ON DELETE CASCADE,
@@ -162,9 +164,9 @@ CREATE TABLE t_message_reactions
 
 CREATE TABLE t_blacklist
 (
-    c_blacklist_id    VARCHAR(36) PRIMARY KEY DEFAULT uuid_generate_v4(),
-    c_user_id         VARCHAR(36) NOT NULL,
-    c_blocked_user_id VARCHAR(36) NOT NULL,
+    c_blacklist_id    uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
+    c_user_id         uuid NOT NULL,
+    c_blocked_user_id uuid NOT NULL,
     c_reason          TEXT,
     c_block_time      BIGINT      NOT NULL    DEFAULT EXTRACT(EPOCH FROM NOW())::BIGINT,
     FOREIGN KEY (c_user_id) REFERENCES t_users (c_user_id) ON DELETE CASCADE,
@@ -173,9 +175,9 @@ CREATE TABLE t_blacklist
 
 CREATE TABLE t_reports
 (
-    c_report_id        VARCHAR(36) PRIMARY KEY                                              DEFAULT uuid_generate_v4(),
-    c_reporter_id      VARCHAR(36) NOT NULL,
-    c_reported_user_id VARCHAR(36) NOT NULL,
+    c_report_id        uuid PRIMARY KEY                                              DEFAULT uuid_generate_v4(),
+    c_reporter_id      uuid NOT NULL,
+    c_reported_user_id uuid NOT NULL,
     c_report_reason    TEXT        NOT NULL,
     c_report_time      BIGINT      NOT NULL                                                 DEFAULT EXTRACT(EPOCH FROM NOW())::BIGINT,
     c_status           VARCHAR(10) CHECK (c_status IN ('pending', 'resolved', 'dismissed')) DEFAULT 'pending',
@@ -223,17 +225,21 @@ DECLARE
     permission_id INT;
 BEGIN
     -- 遍历 JSONB 数组中的每个元素
-    FOR permission_id IN SELECT jsonb_array_elements_text(NEW.c_permissions)::int
-        LOOP
-            -- 检查元素是否存在于 t_permissions 表中
-            IF NOT EXISTS (SELECT 1 FROM t_permissions WHERE c_permission_id = permission_id) THEN
-                RAISE EXCEPTION 'Permission ID % does not exist in t_permissions.', permission_id;
-            END IF;
-        END LOOP;
+    FOR permission_id IN
+        SELECT jsonb_array_elements_text(NEW.c_permissions)::int
+    LOOP
+        -- 检查元素是否存在于 t_permissions 表中
+        IF NOT EXISTS (
+            SELECT 1 FROM t_permissions WHERE c_permission_id = permission_id
+        ) THEN
+            RAISE EXCEPTION 'Permission ID % does not exist in t_permissions.', permission_id;
+        END IF;
+    END LOOP;
 
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
+
 
 CREATE TRIGGER trigger_check_permissions
     BEFORE INSERT OR UPDATE
