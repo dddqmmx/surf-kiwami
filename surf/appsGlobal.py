@@ -53,7 +53,7 @@ def get_logger(logfile=APPNAME):
     return logger
 
 
-def setResult(command, data, path, extra_col=None, log=''):
+def setResult(command, data, path, extra_col=None, log='') -> str:
     if not isinstance(extra_col, list):
         extra_col = []
     result = {
