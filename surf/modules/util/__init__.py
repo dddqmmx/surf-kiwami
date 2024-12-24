@@ -8,4 +8,4 @@ Last Edit Time  :
 from .base_model import BaseModel
 from .base_consumer import BaseConsumer
 from .es_client import ESClient as Ec
-from .ConfigManager import TomlConfigManager
+from .config_manager import TomlConfigManager

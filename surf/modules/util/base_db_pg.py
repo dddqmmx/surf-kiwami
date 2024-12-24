@@ -1,6 +1,6 @@
 import re
 from typing import Union, List, Dict
-from ConfigManager import TomlConfigManager
+from .config_manager import TomlConfigManager
 from psycopg2.pool import SimpleConnectionPool
 
 
@@ -467,8 +467,8 @@ if __name__ == "__main__":
     # print("")
     # filters = {
     #     "uuid": '1',
-    #     "nickname": '1',
-    #     "public_key": '1'
+    #     "c_nickname": '1',
+    #     "c_public_key": '1'
     # }
     # pg.save('public.user', filters, primary='uuid')
     # print(pg.query(sql))
@@ -476,25 +476,25 @@ if __name__ == "__main__":
     print("")
     filters = [
         {
-            "nickname": 'dddqmmx',
-            "public_key": 'tmd弄个自增长id啊混蛋'
+            "c_nickname": 'dddqmmx',
+            "c_public_key": 'tmd弄个自增长id啊混蛋'
         },
         {
-            "nickname": 'Van Darkholme',
-            "public_key": 'FaQ'
+            "c_nickname": 'Van Darkholme',
+            "c_public_key": 'FaQ'
         },
         {
-            "nickname": '七海娜娜米',
-            "public_key": '114514'
+            "c_nickname": '七海娜娜米',
+            "c_public_key": '114514'
         },
         {
-            "nickname": '白上吹雪',
-            "public_key": '1919810'
+            "c_nickname": '白上吹雪',
+            "c_public_key": '1919810'
         },
         {
-            "nickname": '我就是傻逼',
-            "public_key": '131331'
+            "c_nickname": '我就是傻逼',
+            "c_public_key": '131331'
         }
     ]
-    res = pg.save('public.user', filters, debug=True)
+    res = pg.save('t_users', filters, debug=True)
     print(res)
