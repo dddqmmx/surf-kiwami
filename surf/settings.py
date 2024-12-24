@@ -56,10 +56,16 @@ MIDDLEWARE = [
 ROOT_URLCONF = "surf.urls"
 ASGI_APPLICATION = "surf.routing.application"
 
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+    }
+}
+
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / 'surf_static']
+        "DIRS": [BASE_DIR / 'surf-web']
         ,
         "APP_DIRS": True,
         "OPTIONS": {
