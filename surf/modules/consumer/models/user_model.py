@@ -67,6 +67,23 @@ class UserModel(BaseModel):
         finally:
             return res
 
+    def check_user_exist_by_email(self, email: str, debug: bool = False) -> bool:
+        res = False
+        try:
+            query_sql = """
+            SELECT count(1) FROM public.t_users WHERE c_user_info->>'email' = %s
+            """
+            res = True if self._pg.query(query_sql, [email])[0].get('count') == 1 else False
+            if debug:
+                if not res:
+                    logger.info(f"invalid user_data:{email}")
+                else:
+                    logger.info(f"user:{email}'s user_data:{email}")
+        except Exception as e:
+            logger.error(f"check user exist by email:{email}:{e}")
+        finally:
+            return res
+
 
 if __name__ == '__main__':
     um = UserModel()

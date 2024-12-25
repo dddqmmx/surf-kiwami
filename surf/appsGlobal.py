@@ -93,6 +93,8 @@ def errorResult(command, error_msg, path, log=''):
 
 logger = get_logger()
 
+HEARTBEAT_TIMEOUT = 300
+
 CHAT_TEMP = {
     "_id": "",
     "_index": "chat_message",

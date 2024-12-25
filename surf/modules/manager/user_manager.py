@@ -10,7 +10,10 @@ from __future__ import annotations
 import asyncio
 import datetime
 from typing import Any, Dict, Optional, TYPE_CHECKING
-from surf.appsGlobal import get_logger
+
+from django.utils import timezone
+
+from surf.appsGlobal import get_logger, HEARTBEAT_TIMEOUT
 from surf.modules.entity import SurfUser
 from surf.modules.util import BaseConsumer
 
@@ -22,7 +25,7 @@ class UserManager(object):
         self._connect_users: Dict[str, SurfUser] = {}
         self._lock = asyncio.Lock()
         _con_log.info("UserManager initialized")
-        asyncio.create_task(self.heartbeat_checker(), name='heartbeat_checker')
+        asyncio.create_task(self.heartbeat_checker(), name='user_manager_heartbeat_checker')
 
     async def add_user(self,
                        user_id: str,
@@ -64,14 +67,13 @@ class UserManager(object):
             return self._connect_users
 
     async def heartbeat_checker(self, interval: int = 30):
-        __HEARTBEAT_TIMEOUT = 300
         while True:
             await asyncio.sleep(interval)
             async with self._lock:
-                current_time = datetime.datetime.now()
+                current_time = timezone.now()
                 inactivate_users = [
                     user_id for user_id, user in self._connect_users.items()
-                    if (current_time - user.connect_at).total_seconds() > __HEARTBEAT_TIMEOUT
+                    if (current_time - user.connect_at).total_seconds() > HEARTBEAT_TIMEOUT
                 ]
                 for user_id in inactivate_users:
                     await self.remove_user(user_id)

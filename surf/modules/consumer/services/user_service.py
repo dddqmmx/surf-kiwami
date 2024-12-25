@@ -64,3 +64,14 @@ class UserService(BaseService):
         else:
             logger.error(f"invalid user_id:{user_id}")
             return errorResult(text_data['command'], 'invalid user_id:', text_data['path'])
+
+    def check_user_exits(self, text_data: Dict[str, Any]) -> str | List[str]:
+        email = text_data['data'].get('email', '')
+        if self.param_check(params=[email], param_type=str):
+            if self.__userModel.check_user_exist_by_email(email=email):
+                return errorResult(text_data['command'], 'user exist', text_data['path'])
+            else:
+                return [email]
+        else:
+            logger.error(f"invalid email: {email}")
+            return errorResult(text_data['command'], 'invalid email', text_data['path'])
