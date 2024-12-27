@@ -66,7 +66,7 @@ class SurfConsumer(BaseConsumer):
         else:
             request_json = REQUEST_FORMAT
             request_json['path'] = 'user'
-            request_json['command'] = 'inner_get_user_info'
+            request_json['inner'] = True
             request_json['data'] = {
                 'user_id': user['id']
             }
@@ -88,11 +88,11 @@ class SurfConsumer(BaseConsumer):
             code, flag = await self.pool.get_email_code(respond[0])
             if flag:
                 email_msg = f'欢迎您注册Surf!这是您的验证码：{code}，5分钟内有效'
-                send_mail('欢迎您注册Surf！',
-                          email_msg,
-                          settings.DEFAULT_FROM_EMAIL,
-                          text_data['data']['email'],
-                          fail_silently=False)
+                # send_mail('欢迎您注册Surf！',
+                #           email_msg,
+                #           settings.DEFAULT_FROM_EMAIL,
+                #           text_data['data']['email'],
+                #           fail_silently=False)
                 logger.info(f"Email sent to {text_data['data']['email'][0]}")
                 await self.send(setResult(text_data['command'], 'email send', text_data['path']))
             else:

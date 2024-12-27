@@ -54,7 +54,7 @@ class UserService(BaseService):
         if self.param_check(params=[user_id]):
             try:
                 data = self.__userModel.get_user_data_by_id(user_id=user_id)
-                if str(text_data['command']).startswith('inner_'):
+                if text_data.get('inner', False):
                     return data[0]
                 return setResult(text_data['command'], data[0], 'user') if data\
                     else errorResult(text_data['command'], 'un-existence user', text_data['path'])
