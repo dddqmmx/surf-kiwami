@@ -9,6 +9,7 @@ import json
 import logging
 import os
 from logging.handlers import TimedRotatingFileHandler
+from typing import Dict
 
 
 def getPlatformPath():
@@ -53,14 +54,12 @@ def get_logger(logfile=APPNAME):
     return logger
 
 
-def setResult(command, data, path, extra_col=None, log='') -> str:
+def setResult(command: str, data, path, extra_col=None, log='') -> str:
     if not isinstance(extra_col, list):
         extra_col = []
-    result = {
-        "command": str(command),
-        "path": path,
-        "messages": []
-    }
+    result = REQUEST_FORMAT
+    result["command"] = command
+    result["path"] = path
     if data is False:
         result['status'] = False
         result['msg'] = '执行失败！'
@@ -68,7 +67,7 @@ def setResult(command, data, path, extra_col=None, log='') -> str:
         for col in extra_col:
             result.update({k: v for k, v in col.items()})
         result['status'] = True
-        result['messages'] = data
+        result['data'] = data
         result['msg'] = '执行成功！'
     # 添加审计日志编辑内容
     if log != '':
@@ -78,12 +77,11 @@ def setResult(command, data, path, extra_col=None, log='') -> str:
 
 
 def errorResult(command, error_msg, path, log=''):
-    result = {
-        "command": str(command),
-        "path": path,
-        "messages": False,
-        "msg": str(error_msg)
-    }
+    result = REQUEST_FORMAT
+    result["command"] = command
+    result["path"] = path
+    result["data"] = False
+    result["msg"] = str(error_msg)
     # 添加审计日志编辑内容
     if log != '':
         result['log'] = log
@@ -126,9 +124,9 @@ DEFAULT_PERMISSION_SETTINGS = {
     '114514': None
 }
 
-REQUEST_FORMAT = {
-    "path": None,
-    "command": None,
-    "request_id": None,
-    "data": {}
+REQUEST_FORMAT: Dict[str, any] = {
+    "path": "",
+    "command": "",
+    "request_id": "",
+    "data": []
 }
