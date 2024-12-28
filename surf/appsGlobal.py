@@ -54,11 +54,12 @@ def get_logger(logfile=APPNAME):
     return logger
 
 
-def setResult(command: str, data, path, extra_col=None, log='') -> str:
+def setResult(command: str, request_id, data, path, extra_col=None, log='') -> str:
     if not isinstance(extra_col, list):
         extra_col = []
     result = REQUEST_FORMAT
     result["command"] = command
+    result["request_id"] = request_id
     result["path"] = path
     if data is False:
         result['status'] = False
@@ -76,9 +77,10 @@ def setResult(command: str, data, path, extra_col=None, log='') -> str:
     return json.dumps(result)
 
 
-def errorResult(command, error_msg, path, log=''):
+def errorResult(command, request_id, error_msg, path, log=''):
     result = REQUEST_FORMAT
     result["command"] = command
+    result["request_id"] = request_id
     result["path"] = path
     result["data"] = False
     result["msg"] = str(error_msg)

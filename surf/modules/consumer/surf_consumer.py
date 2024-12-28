@@ -94,7 +94,7 @@ class SurfConsumer(BaseConsumer):
                 #           text_data['data']['email'],
                 #           fail_silently=False)
                 logger.info(f"Email sent to {text_data['data']['email'][0]}")
-                await self.send(setResult(text_data['command'], 'email send', text_data['path']))
+                await self.send(setResult(text_data['command'], text_data['request_id'], 'email send', text_data['path']))
             else:
                 logger.warning(f"Email not sent to {text_data['data']['email'][0]}, reason: repeat sending")
         else:
