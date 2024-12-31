@@ -131,20 +131,14 @@ export class RequestService {
         return response; // 返回从 socket 获得的数据
     }
 
-
-
-    loginAndSubscribe(userFile: { public_key: string }) {
-        this.requestLogin(userFile.public_key);
-    }
-
-    private requestLogin(publicKey: string) {
+    public requestLogin(account: string | undefined, password: string | undefined) {
         this.socket.request('user', 'login', {
-            "public_key": publicKey,
+            'account':account,
+            'password':password
         }).then(response => {
-            console.log('Received response:', response);
-            if (response['status'] === 'success') {
-                this.router.navigate(['main/chat']).then();
-            }
+          if (response['id']){
+            this.router.navigate(['main']).then();
+          }
         }).catch(error => {
             console.error('Request failed:', error);
         });

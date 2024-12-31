@@ -1,0 +1,5 @@
+:host {
+    display: flex; /* 或 flex */
+    width: 100%;
+    height: 100%;
+}

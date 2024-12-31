@@ -1,4 +1,4 @@
-:host {
+z:host {
     display: flex; /* 或 flex */
     width: 100%;
     height: 100%;
@@ -34,6 +34,7 @@ body {
 }
 
 .sidebar div {
+      background-color: #5fa7ff;
     display: flex;
     align-items: center;
     margin-bottom: 15px;
@@ -70,33 +71,4 @@ body {
     background-color: white;
     padding: 20px;
     overflow-y: auto;
-}
-
-/* 响应式设计 */
-@media (max-width: 768px) {
-    .container {
-        flex-direction: column;
-    }
-
-    .sidebar {
-        width: 100%;  /* 侧边栏在小屏幕下占满整行 */
-        min-width: unset;  /* 去掉最小宽度限制 */
-        flex-direction: row;
-        justify-content: space-around;
-        padding: 10px 0;
-    }
-
-    .sidebar div {
-        margin: 0;
-        padding: 10px 15px;
-        flex-direction: column;
-    }
-
-    .sidebar img {
-        margin-bottom: 5px;
-    }
-
-    .content {
-        padding: 15px;
-    }
 }

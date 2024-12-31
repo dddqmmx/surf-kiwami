@@ -9,7 +9,7 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* 子元素不再拉伸 */
+    align-items: center; /* 子元素不再拉伸 */
 }
 
 .user-info {

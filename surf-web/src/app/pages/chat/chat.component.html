@@ -1,7 +1,7 @@
-<app-session-list (sessionSelected)="handleSessionSelected($event)"></app-session-list>
-<div *ngIf="sessionId" class="container">
+<div class="container">
     <div class="chat-header">
-        <span class="session-name" style="margin: 0;">{{ sessionName }}</span>
+<!--        <span class="session-name" style="margin: 0;">{{ sessionName }}</span>-->
+              <span class="session-name" style="margin: 0;">宇宙机器人粉丝群</span>
     </div>
     <div #chatContent (scroll)="onScroll($event)" class="chat-content">
         <div class="message-list">
@@ -11,9 +11,10 @@
                      height="40" ngSrc="/images/avatar/default-avatar.png"
                      width="40">
                 <div class="message-content">
-                    <span *ngIf="commonDataService.hasUserInfo(message['user_id'])"
-                          class="username">{{ commonDataService.getUserInfo(message['user_id'])['user_nickname'] }}</span>
-                    <span class="message">{{ message['content'] }}</span>
+<!--                    <span *ngIf="commonDataService.hasUserInfo(message['user_id'])"-->
+<!--                          class="username">七海Nana7mi{{ commonDataService.getUserInfo(message['user_id'])['user_nickname'] }}</span>-->
+                   <span class="username">七海Nana7mi</span>
+                    <pre class="message">{{ message['content'] }}</pre>
                 </div>
                 <img *ngIf="message['user_id'] == commonDataService.clientUserId" alt="user avatar" class="avatar"
                      height="40" ngSrc="/images/avatar/default-avatar.png"
@@ -34,6 +35,4 @@
             </textarea>
         </div>
     </div>
-</div>
-<div *ngIf="!sessionId" class="background">
 </div>

@@ -31,12 +31,13 @@
     </div>
 
     <div class="login-tabs">
-        <span class="login-title">登录</span>
+        <span class="login-title">欢迎登录Surf-KIWAMI</span>
         <img class="user-avatar" alt="" src="/images/avatar/default-avatar.png">
-        <select class="select-username" [(ngModel)]="selectedUserPath">
-            <option *ngFor="let user of users" [value]="user.file">{{ user.name }}</option>
-        </select>
+<!--        <span>服务器:<select class="select-username"><option></option></select></span>-->
+        <span>账号 <input [(ngModel)]="account" type="text"></span>
+        <span>密码 <input [(ngModel)]="password" type="password"></span>
         <button class="login-button" (click)="login()">登录</button>
-        <a class="to_user_manager" (click)="toManageUsers()">管理用户</a>
+<!--        <a class="to_user_manager" (click)="toManageUsers()">管理登录服务器列表</a>-->
+        <a class="to_user_manager" href="/register">没有账号?点击注册</a>
     </div>
 </div>
