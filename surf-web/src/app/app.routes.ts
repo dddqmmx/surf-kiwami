@@ -15,7 +15,11 @@ export const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: "register", component: RegisterComponent},
   {path: 'main', component: MainComponent, children: [
-      {path: "contacts", component:ContactsComponent},
+      {path: "contacts", component:ContactsComponent, children:
+          [
+            {path: "user_info", component:UserInfoComponent}
+          ]
+      },
       {path: "session", component: SessionComponent},
       {path: "chat", component: ChatComponent},
       {path: "settings", component: SettingsComponent, children:
