@@ -64,6 +64,7 @@
 }
 
 .friend-requests {
+  margin-top: 5px;
   background-color: #e67e22;
   color: #ffffff;
 }
@@ -90,7 +91,7 @@
 }
 
 .contact-item:hover {
-  background-color: #3b4a5f;
+  background-color: #1781ff;
 }
 
 .avatar {

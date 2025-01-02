@@ -33,7 +33,6 @@ export class SessionListComponent {
         }
     }
 
-
     backToSessionList() {
         this.serverInfo = undefined
         this.sessionSelected.emit({sessionId: null, sessionType: null});  // 向父组件传递数据

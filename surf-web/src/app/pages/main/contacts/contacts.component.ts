@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {NgOptimizedImage} from "@angular/common";
-import {RouterOutlet} from "@angular/router";
+import {Router, RouterOutlet} from "@angular/router";
 
 @Component({
   selector: 'app-contacts',
@@ -13,5 +13,9 @@ import {RouterOutlet} from "@angular/router";
   styleUrl: './contacts.component.css'
 })
 export class ContactsComponent {
-
+  constructor(protected router:Router) {
+  }
+  viewContacts(){
+    this.router.navigate(['/main/contacts/user_info']).then();
+  }
 }

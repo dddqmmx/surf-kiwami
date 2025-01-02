@@ -5,8 +5,8 @@
     <div class="form-input">
       <span>邮箱</span>
       <div class="input-group">
-        <input type="text" class="input" placeholder="请输入内容">
-        <button class="button">发送</button>
+        <input [(ngModel)]="email" type="email" class="input" placeholder="请输入内容">
+        <button class="button" (click)="requestEmailCode(email)">发送</button>
       </div>
     </div>
     <div class="form-input">

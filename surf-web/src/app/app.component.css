@@ -4,6 +4,30 @@ html, body {
     height: 100%;
     width: 100%;
 }
+.loading-background{
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* 子元素不再拉伸 */
+  flex-direction: column;
+  background-position: center center;
+  background-size: cover;
+  background-image: url('/images/background/user_info.jpg');
+  background-color: rgba(0, 0, 0, 0.5);
+  background-blend-mode: darken;
+}
+.loading-icon{
+  border: 2px solid black;
+  width: 10%;
+  border-radius: 50%;
+}
+
+.loading-text{
+  color: white;
+  margin-top: 20px;
+  font-size: 50px;
+  text-shadow: #000 2px 0 0, #000 0 2px 0, #000 -2px 0 0, #000 0 -2px 0;
+}
 
 .app-container {
     display: flex;

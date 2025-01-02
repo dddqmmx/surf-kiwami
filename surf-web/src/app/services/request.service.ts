@@ -144,4 +144,14 @@ export class RequestService {
         });
     }
 
+    public emailCheck(email: string | undefined) {
+        this.socket.request('email', 'email_check', {
+            'email':email
+        }).then(response => {
+          console.log(response)
+        }).catch(error => {
+            console.error('Request failed:', error);
+        });
+    }
+
 }
