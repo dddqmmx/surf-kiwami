@@ -5,14 +5,16 @@
 }
 
 .container {
-  background: url("/images/background/user_info.jpg");
-  background-position: center center;
-  background-size: cover;
   height: 100%;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center; /* 子元素不再拉伸 */
+  background-position: center center;
+  background-size: cover;
+  background-image: url('/images/background/user_info.jpg');
+  background-color: rgba(0, 0, 0, 0.1);
+  background-blend-mode: darken;
 }
 
 .user-info-container {
@@ -23,13 +25,12 @@
 }
 
 .user-info {
-
   display: flex;
-
 }
 
 
 .user-info-context {
+
   display: flex;
   flex-direction: column; /* 让用户名和消息在垂直方向排列 */
   padding-left: 1rem;
@@ -42,4 +43,36 @@
 
 .user_id {
   margin-top: 1rem;
+}
+
+.self-introduction-container {
+    color: #ffffff;
+  border-radius: 10px;
+  margin-top: 20px;
+  background: #3498db;
+  padding: 10px;
+}
+.self-introduction-title {
+  width: 100%;
+  /*border-bottom: #526c82 solid 3px;*/
+}
+
+.option-button-container {
+  margin-top: 20px;
+  display: flex;
+  width: 100% ;
+  justify-content: center;
+}
+
+.btn {
+  background-color: #3498db;
+  color: #ffffff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-right: 10px;
+  margin-left: 10px;
+  transition: background-color 0.3s ease;
 }
