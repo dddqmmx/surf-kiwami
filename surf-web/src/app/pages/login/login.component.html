@@ -8,7 +8,6 @@
                 <p>当前连接数：156</p>
                 <p>系统负载：低</p>
             </div>
-
             <h2>最新公告</h2>
             <div class="announcement-list">
                 <div class="announcement-item">
@@ -31,13 +30,19 @@
     </div>
 
     <div class="login-tabs">
-        <span class="login-title">欢迎登录Surf-KIWAMI</span>
-        <img class="user-avatar" alt="" src="/images/avatar/default-avatar.png">
-<!--        <span>服务器:<select class="select-username"><option></option></select></span>-->
-        <span>账号 <input [(ngModel)]="account" type="text"></span>
-        <span>密码 <input [(ngModel)]="password" type="password"></span>
-        <button class="login-button" (click)="login()">登录</button>
-<!--        <a class="to_user_manager" (click)="toManageUsers()">管理登录服务器列表</a>-->
-        <a class="to_user_manager" href="/register">没有账号?点击注册</a>
+      <span class="login-title">欢迎登录Surf-KIWAMI</span>
+      <img class="user-avatar" alt="" src="/images/avatar/default-avatar.png">
+      <div class="input-container">
+        <span>账号</span>
+        <input class="input" [(ngModel)]="account" type="text">
+        <span>密码 </span>
+        <input class="input" [(ngModel)]="password" type="password">
+        <label style="vertical-align: middle;">
+          <input type="checkbox" [(ngModel)]="rememberMe" style="vertical-align: middle;" />
+          自动登录
+        </label>
+      </div>
+      <button class="login-button" (click)="login()">登录</button>
+      <a class="to_user_manager" href="/register">没有账号?点击注册</a>
     </div>
 </div>

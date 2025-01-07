@@ -5,7 +5,7 @@
     <div class="settings-item">
       <label class="settings-label">自动登录</label>
       <label class="settings-toggle">
-        <input type="checkbox">
+        <input [(ngModel)]="rememberMe" (ngModelChange)="onRememberMeChange($event)"  type="checkbox">
         <span class="slider"></span>
       </label>
     </div>

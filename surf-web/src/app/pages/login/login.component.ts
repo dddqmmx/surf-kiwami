@@ -8,43 +8,52 @@ import {CommonDataService} from "../../services/common-data.service";
 import {RequestService} from "../../services/request.service";
 
 @Component({
-    selector: 'app-login',
-    standalone: true,
-    imports: [
-        NgOptimizedImage,
-        NgForOf,
-        FormsModule
-    ],
-    templateUrl: './login.component.html',
-    styleUrl: './login.component.css'
+  selector: 'app-login',
+  standalone: true,
+  imports: [
+    NgOptimizedImage,
+    NgForOf,
+    FormsModule
+  ],
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.css'
 })
 export class LoginComponent implements OnInit, OnDestroy {
-    constructor(
-        private requestService: RequestService,
-        private router: Router,
-        private socket: SocketService,
-        private commonData: CommonDataService) {
+  constructor(
+    private requestService: RequestService,
+    private router: Router,
+    private socket: SocketService,
+    private commonData: CommonDataService) {
+  }
+
+  subscriptions: Subscription[] = [];
+  account: string | undefined;
+  password: string | undefined;
+  rememberMe: boolean = false;
+
+  ngOnDestroy() {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
+  }
+
+
+  ngOnInit(): void {
+  }
+
+  login() {
+    if (this.rememberMe) {
+      // 如果记住我勾选，则再次更新存储
+      localStorage.setItem('rememberMe', "true");
+      if (typeof this.account === "string") {
+        localStorage.setItem('username', this.account);
+      }
+      if (typeof this.password === "string") {
+        localStorage.setItem('password', this.password);
+      }
     }
+    this.requestService.requestLogin(this.account, this.password)
+  }
 
-    subscriptions: Subscription[] = [];
-    account: string | undefined;
-    password: string | undefined;
-
-    ngOnDestroy() {
-        this.subscriptions.forEach(subscription => subscription.unsubscribe());
-    }
-
-
-    ngOnInit(): void {
-    }
-
-    login(){
-        this.socket.initializeMainConnection('localhost:8000').then(()=>{
-          this.requestService.requestLogin(this.account,this.password)
-        })
-    }
-
-    toManageUsers() {
-        this.router.navigate(['/manage-users']).then();
-    }
+  toManageUsers() {
+    this.router.navigate(['/manage-users']).then();
+  }
 }

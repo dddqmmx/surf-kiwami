@@ -19,8 +19,9 @@
   border-radius: 25px;
   margin-right: 20px;
   overflow: hidden;
-    overflow-y: auto;
+  overflow-y: auto;
 }
+
 .info-panel::-webkit-scrollbar {
   display: none;
 }
@@ -36,7 +37,7 @@
 }
 
 .info-content {
-    margin: 2rem;
+  margin: 2rem;
 }
 
 .info-content h2 {
@@ -78,7 +79,11 @@
   padding: 3rem;
 }
 
-.login-tabs span{
+.login-tabs span {
+  margin-top: 10px;
+}
+
+.login-tabs label {
   margin-top: 10px;
 }
 
@@ -86,7 +91,7 @@
 .login-title {
   font-size: 25px;
   color: #057feb;
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .user-avatar {
@@ -94,6 +99,12 @@
   width: 120px;
   height: 120px;
   border-radius: 50%;
+}
+
+.input-container {
+  display: flex;
+  align-content: start;
+  flex-direction: column;
 }
 
 .select-server {
@@ -114,10 +125,10 @@
   color: #057feb;
   margin-top: 14px;
   cursor: pointer;
+  text-decoration-line: none;
 }
 
-input {
-  width: 100%;
+.input {
   padding: 10px 15px;
   font-size: 16px;
   color: #333;
@@ -129,17 +140,55 @@ input {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-input:focus {
+.input:focus {
   border-color: #4a90e2;
   background: #fff;
   box-shadow: 0 2px 6px rgba(74, 144, 226, 0.5);
 }
 
-input::placeholder {
+.input::placeholder {
   color: #aaa;
   font-style: italic;
 }
 
-input:hover {
+.input:hover {
   border-color: #bbb;
 }
+
+/* 隐藏原始复选框 */
+input[type="checkbox"] {
+  appearance: none; /* 去掉默认样式 */
+  -webkit-appearance: none; /* Safari 兼容 */
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: middle;
+  background-color: #fff;
+  transition: all 0.3s ease;
+}
+
+/* 鼠标悬停效果 */
+input[type="checkbox"]:hover {
+  border-color: #007bff;
+}
+
+/* 选中状态 */
+input[type="checkbox"]:checked {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+/* 选中后的对勾 */
+input[type="checkbox"]:checked::after {
+  content: "✔";
+  font-size: 14px;
+  color: #fff;
+  display: block;
+  text-align: center;
+  line-height: 18px;
+}
+
