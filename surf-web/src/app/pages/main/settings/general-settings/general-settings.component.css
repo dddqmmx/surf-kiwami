@@ -103,19 +103,3 @@ input:checked + .slider {
 input:checked + .slider:before {
   transform: translateX(20px);
 }
-
-.save-button {
-  width: 100%;
-  background-color: #6b73ff;
-  color: white;
-  padding: 15px;
-  border: none;
-  font-size: 1.2em;
-  font-weight: bold;
-  cursor: pointer;
-  text-align: center;
-}
-
-.save-button:hover {
-  background-color: #000dff;
-}

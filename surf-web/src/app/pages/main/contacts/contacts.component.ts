@@ -18,4 +18,7 @@ export class ContactsComponent {
   viewContacts(){
     this.router.navigate(['/main/contacts/user_info']).then();
   }
+  viewFriendRequests(){
+    this.router.navigate(['/main/contacts/friend_request_list']).then();
+  }
 }
