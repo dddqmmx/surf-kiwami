@@ -10,6 +10,7 @@ import {ContactsComponent} from "./pages/main/contacts/contacts.component";
 import {AccountManageComponent} from "./pages/main/settings/account-manage/account-manage.component";
 import {RegisterComponent} from "./pages/register/register.component";
 import {GeneralSettingsComponent} from "./pages/main/settings/general-settings/general-settings.component";
+import {FriendRequestListComponent} from "./pages/main/contacts/friend-request-list/friend-request-list.component";
 
 export const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -18,6 +19,7 @@ export const routes: Routes = [
   {path: 'main', component: MainComponent, children: [
       {path: "contacts", component:ContactsComponent, children:
           [
+            {path: "friend_request_list", component: FriendRequestListComponent},
             {path: "user_info", component:UserInfoComponent}
           ]
       },
@@ -29,8 +31,6 @@ export const routes: Routes = [
             {path: "general_settings", component:GeneralSettingsComponent}
           ]
       },
-      {path: "user-info", component: UserInfoComponent},
-      {path: "manage-users", component: ManageUsersComponent}
     ]
   }
 ];
