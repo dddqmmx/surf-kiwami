@@ -52,6 +52,33 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
+  async selectImage() {
+    try {
+      // 弹出文件选择器
+      const [fileHandle] = await (window as any).showOpenFilePicker({
+        types: [
+          {
+            description: 'Images',
+            accept: {
+              'image/*': ['.png', '.jpg', '.jpeg', '.gif']
+            }
+          }
+        ],
+        multiple: false // 仅允许单个文件
+      });
+
+      // 获取文件内容
+      const file = await fileHandle.getFile();
+      const reader = new FileReader();
+
+      reader.onload = () => {
+      };
+      reader.readAsDataURL(file);
+    } catch (error) {
+      console.error('文件选择已取消', error);
+    }
+  }
+
   onScroll(event: any) {
     const element = event.target;
     if (element.scrollTop === 0) {
