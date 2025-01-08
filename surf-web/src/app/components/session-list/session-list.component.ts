@@ -6,45 +6,57 @@ import {CommonDataService} from "../../services/common-data.service";
 import {NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 
 @Component({
-    selector: 'app-session-list',
-    standalone: true,
-    imports: [
-        NgIf,
-        NgForOf,
-        NgOptimizedImage
-    ],
-    templateUrl: './session-list.component.html',
-    styleUrl: './session-list.component.css'
+  selector: 'app-session-list',
+  standalone: true,
+  imports: [
+    NgIf,
+    NgForOf,
+    NgOptimizedImage
+  ],
+  templateUrl: './session-list.component.html',
+  styleUrl: './session-list.component.css'
 })
 export class SessionListComponent {
-    @Output() sessionSelected = new EventEmitter<{ sessionId: string | null, sessionType: string | null }>();
-    serverInfo: Record<string, any> | undefined;
-    protected serverId: string = "";
+  @Output() sessionSelected = new EventEmitter<{ sessionId: string | null, sessionType: string | null }>();
+  serverInfo: any = {
+    name: "123",
+    channels: [
+      {
+        "group_name": "文字频道组",
+        "channels": [
+          {
+            "channel_name": "文字频道",
+            "channel_type": "text"
+          }
+        ]
+      }
+    ]
+  };
+  protected serverId: string = "";
 
-    constructor(protected commonDataService: CommonDataService, private requestService: RequestService, private router: Router, private voiceChatService: VoiceChatService) {
-    }
+  constructor(protected commonDataService: CommonDataService, private requestService: RequestService, private router: Router, private voiceChatService: VoiceChatService) {
+  }
 
-    public async getServerChannels(serverId: string) {
-        this.serverId = serverId;
-        await this.requestService.getServerChannels(serverId)
-        this.serverInfo = this.commonDataService.getServerInfoById(serverId)
-        if (this.serverInfo) {
-            console.log(this.serverInfo['channels']);
-        }
+  public async getServerChannels(serverId: string) {
+    this.serverId = serverId;
+    await this.requestService.getServerChannels(serverId)
+    this.serverInfo = this.commonDataService.getServerInfoById(serverId)
+    if (this.serverInfo) {
     }
+  }
 
-    backToSessionList() {
-        this.serverInfo = undefined
-        this.sessionSelected.emit({sessionId: null, sessionType: null});  // 向父组件传递数据
-    }
+  backToSessionList() {
+    this.serverInfo = undefined;
+    this.router.navigate(['/main/session']).then();
+  }
 
-    toChat(channelId: any, channelType: any) {
-        if (channelType == 'text') {
-            this.sessionSelected.emit({sessionId: channelId, sessionType: channelType});  // 向父组件传递数据
-        } else if (channelType == 'voice') {
-            this.voiceChatService.initializeRecorder().then(r => {
-                console.log('录音开始');
-            })
-        }
+  toChat(channelId: any, channelType: any) {
+    if (channelType == 'text') {
+      this.router.navigate(['/main/session/chat']).then();
+    } else if (channelType == 'voice') {
+      this.voiceChatService.initializeRecorder().then(r => {
+        console.log('录音开始');
+      })
     }
+  }
 }

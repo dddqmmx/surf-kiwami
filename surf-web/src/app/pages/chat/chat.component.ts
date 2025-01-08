@@ -33,7 +33,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
   sessionId: string | null = null;
   sessionType: string | null = null;
   scrollToBottomFlag: boolean = false;
-  massageInputValue = "";
+  messageInputValue = "";
 
   constructor(private requestService: RequestService, private socketService: SocketService, protected commonDataService: CommonDataService, private route: ActivatedRoute) {
   }
@@ -69,13 +69,13 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   sendMessage() {
-    if (this.massageInputValue) {
+    if (this.messageInputValue.trim()!="") {
       this.messageList.push({
         "user_id": '1',
-        "content": this.massageInputValue
+        "content": this.messageInputValue
       })
       // this.requestService.sendMessage(this.sessionId, this.massageInputValue)
-      this.massageInputValue = ""
+      this.messageInputValue = ""
       this.scrollToBottomFlag = true;
     }
   }

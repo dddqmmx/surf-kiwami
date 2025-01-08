@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {Router, RouterOutlet} from "@angular/router";
 import {NgClass, NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 import {CommonDataService} from "../../services/common-data.service";
@@ -46,7 +46,7 @@ export class MainComponent implements OnInit, OnDestroy {
     {name: 'settings', icon: '/images/icon/settings.svg', height: 38, width: 38},
   ];
 
-  selectedOption: string = '';  // 记录当前选中的选项.
+  selectedOption: string = 'chat';  // 记录当前选中的选项.
 
   // 处理选择操作，更新 selectedOption
   onSelect(option: any) {
@@ -71,7 +71,7 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
   }
+
 
 }

@@ -137,7 +137,8 @@ export class RequestService {
             'password':password
         }).then(response => {
           if (response['id']){
-            this.router.navigate(['main']).then();
+            this.commonData.clientUserId = response['id']
+            this.router.navigate(['/main/session']).then();
           }
         }).catch(error => {
             console.error('Request failed:', error);

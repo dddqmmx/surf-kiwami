@@ -11,6 +11,7 @@
 }
 
 .sidebar {
+    width: 10%; /* 固定宽度 */
   background-color: #3b96ff;
   color: #ecf0f1;
   padding: 20px;

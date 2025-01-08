@@ -16,19 +16,26 @@ export const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
   {path: "register", component: RegisterComponent},
-  {path: 'main', component: MainComponent, children: [
-      {path: "contacts", component:ContactsComponent, children:
+  {
+    path: 'main', component: MainComponent, children: [
+      {
+        path: "contacts", component: ContactsComponent, children:
           [
             {path: "friend_request_list", component: FriendRequestListComponent},
-            {path: "user_info", component:UserInfoComponent}
+            {path: "user_info", component: UserInfoComponent}
           ]
       },
-      {path: "session", component: SessionComponent},
-      {path: "chat", component: ChatComponent},
-      {path: "settings", component: SettingsComponent, children:
+      {
+        path: "session", component: SessionComponent, children:
           [
-            {path: "account_manage", component:AccountManageComponent},
-            {path: "general_settings", component:GeneralSettingsComponent}
+            {path: "chat", component: ChatComponent},
+          ]
+      },
+      {
+        path: "settings", component: SettingsComponent, children:
+          [
+            {path: "account_manage", component: AccountManageComponent},
+            {path: "general_settings", component: GeneralSettingsComponent}
           ]
       },
     ]
