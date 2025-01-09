@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormsModule} from "@angular/forms";
+import {CommonDataService} from "../../../../services/common-data.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-account-manage',
@@ -13,6 +15,9 @@ import {FormsModule} from "@angular/forms";
 export class AccountManageComponent implements OnInit {
   rememberMe = false;
 
+  constructor(protected commonDataService:CommonDataService,protected router:Router) {
+  }
+
   ngOnInit(): void {
     const storedRememberMe = localStorage.getItem('rememberMe') || '';
 
@@ -23,6 +28,12 @@ export class AccountManageComponent implements OnInit {
 
   onRememberMeChange(newValue: boolean): void {
     localStorage.setItem('rememberMe', newValue.toString());
+  }
+
+  logout(){
+    localStorage.setItem('rememberMe', "false");
+    this.commonDataService.clientUserId = "";
+    this.router.navigate(['/login']).then();
   }
 
 

@@ -5,9 +5,13 @@
     <div class="settings-item">
       <label class="settings-label">自动登录</label>
       <label class="settings-toggle">
-        <input [(ngModel)]="rememberMe" (ngModelChange)="onRememberMeChange($event)"  type="checkbox">
+        <input [(ngModel)]="rememberMe" (ngModelChange)="onRememberMeChange($event)" type="checkbox">
         <span class="slider"></span>
       </label>
+    </div>
+    <div class="settings-item">
+      <label class="settings-label">退出登录</label>
+      <button (click)="logout()"  class="settings-input">退出登录</button>
     </div>
   </div>
 </div>
