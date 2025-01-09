@@ -12,7 +12,7 @@ import {RequestService} from "./services/request.service";
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit {
-  loadingFlag: boolean = true;
+  loadingFlag: boolean = false;
 
   constructor(protected socket: SocketService, private requestService: RequestService) {
   }

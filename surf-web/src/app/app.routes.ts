@@ -11,6 +11,9 @@ import {AccountManageComponent} from "./pages/main/settings/account-manage/accou
 import {RegisterComponent} from "./pages/register/register.component";
 import {GeneralSettingsComponent} from "./pages/main/settings/general-settings/general-settings.component";
 import {FriendRequestListComponent} from "./pages/main/contacts/friend-request-list/friend-request-list.component";
+import {SearchUserComponent} from "./pages/main/contacts/search-user/search-user.component";
+import {ChannelsComponent} from "./pages/main/channels/channels.component";
+import {GroupsComponent} from "./pages/main/groups/groups.component";
 
 export const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -19,17 +22,24 @@ export const routes: Routes = [
   {
     path: 'main', component: MainComponent, children: [
       {
+        path: "session", component: SessionComponent, children:
+          [
+            {path: "chat", component: ChatComponent},
+          ]
+      },
+      {
         path: "contacts", component: ContactsComponent, children:
           [
+            {path: "search_user", component: SearchUserComponent},
             {path: "friend_request_list", component: FriendRequestListComponent},
             {path: "user_info", component: UserInfoComponent}
           ]
       },
       {
-        path: "session", component: SessionComponent, children:
-          [
-            {path: "chat", component: ChatComponent},
-          ]
+        path: "groups", component: GroupsComponent
+      },
+      {
+        path: "channels", component: ChannelsComponent
       },
       {
         path: "settings", component: SettingsComponent, children:
