@@ -8,5 +8,4 @@ class AudioProcessor extends AudioWorkletProcessor {
         return true; // 保持处理器活动
     }
 }
-
 registerProcessor('audio-processor', AudioProcessor);
