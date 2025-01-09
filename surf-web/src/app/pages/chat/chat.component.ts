@@ -72,6 +72,12 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
       const reader = new FileReader();
 
       reader.onload = () => {
+        this.messageList.push({
+          "user_id": '1',
+          "type": "image",
+          "content": "file_id"
+        })
+        this.scrollToBottomFlag = true;
       };
       reader.readAsDataURL(file);
     } catch (error) {
@@ -96,9 +102,10 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   sendMessage() {
-    if (this.messageInputValue.trim()!="") {
+    if (this.messageInputValue.trim() != "") {
       this.messageList.push({
-        "user_id": '1',
+        "user_id": "1",
+        "type": "text",
         "content": this.messageInputValue
       })
       // this.requestService.sendMessage(this.sessionId, this.massageInputValue)

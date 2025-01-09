@@ -19,7 +19,7 @@ import {NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 export class SessionListComponent {
   @Output() sessionSelected = new EventEmitter<{ sessionId: string | null, sessionType: string | null }>();
   serverInfo: any = {
-    name: "123",
+    name: "服务器名",
     channels: [
       {
         "group_name": "文字频道组",
@@ -27,6 +27,15 @@ export class SessionListComponent {
           {
             "channel_name": "文字频道",
             "channel_type": "text"
+          }
+        ]
+      },
+      {
+        "group_name": "语音频道组",
+        "channels": [
+          {
+            "channel_name": "语音频道",
+            "channel_type": "voice"
           }
         ]
       }

@@ -14,7 +14,8 @@
           <!--                    <span *ngIf="commonDataService.hasUserInfo(message['user_id'])"-->
           <!--                          class="username">七海Nana7mi{{ commonDataService.getUserInfo(message['user_id'])['user_nickname'] }}</span>-->
           <span class="username">七海Nana7mi</span>
-          <pre class="message">{{ message['content'] }}</pre>
+          <pre *ngIf="message['type'] == 'text'" class="message">{{ message['content'] }}</pre>
+          <img *ngIf="message['type'] == 'image'" class="message" src="/images/src/shang-abi.gif" alt=""/>
         </div>
         <img *ngIf="message['user_id'] == commonDataService.clientUserId" alt="user avatar" class="avatar"
              height="40" ngSrc="/images/avatar/default-avatar.png"
@@ -25,7 +26,8 @@
   <div class="chat-input">
     <div>
       <img alt="" class="input-option" height="24" ngSrc="/images/icon/mic.svg" width="24"/>
-      <img (click)="selectImage()"  alt="" class="input-option" height="24" ngSrc="/images/icon/photo_library.svg" width="24"/>
+      <img (click)="selectImage()" alt="" class="input-option" height="24" ngSrc="/images/icon/photo_library.svg"
+           width="24"/>
       <img alt="" class="input-option" height="24" ngSrc="/images/icon/folder.svg" width="24"/>
     </div>
     <div style="display: flex">
