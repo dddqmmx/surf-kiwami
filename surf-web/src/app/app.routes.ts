@@ -14,6 +14,7 @@ import {FriendRequestListComponent} from "./pages/main/contacts/friend-request-l
 import {SearchUserComponent} from "./pages/main/contacts/search-user/search-user.component";
 import {ChannelsComponent} from "./pages/main/channels/channels.component";
 import {GroupsComponent} from "./pages/main/groups/groups.component";
+import {ErrorComponent} from "./pages/error/error.component";
 
 export const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -49,5 +50,6 @@ export const routes: Routes = [
           ]
       },
     ]
-  }
+  },
+  { path: '**', component: ErrorComponent },
 ];
